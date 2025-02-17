@@ -22,4 +22,16 @@ jobs:
 
       - name: Run Python script
         run: |
-          python script.py
+          ScheduledBinanceDataCollectionCode.py
+          
+      - name: Run Python script
+        run: |
+          python ScheduledBinanceDataCollectionCode.py
+
+      - name: Run Python script
+        run: |
+          ScheduledBitgetDataCollectionCode.py
+
+      - name: Run Python script
+        run: |
+          ScheduledBybitDataCollectionCode.py
