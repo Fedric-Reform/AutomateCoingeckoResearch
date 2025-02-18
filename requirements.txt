@@ -1,3 +1,4 @@
 requests==2.28.1
 pandas==2.2.3
 schedule==1.2.2
+openpyxl==2.0.0
