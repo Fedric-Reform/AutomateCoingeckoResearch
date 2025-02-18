@@ -140,9 +140,9 @@ def main():
 # print("⏳ Scheduler is running. Press Ctrl+C to stop.")
 
 # Keep the script running indefinitely
-while True:
-    schedule.run_pending()
-    time.sleep(60)  # Check for scheduled tasks every 60 seconds
+# while True:
+#     schedule.run_pending()
+#     time.sleep(60)  # Check for scheduled tasks every 60 seconds
 
 if __name__ == "__main__":
     main()
