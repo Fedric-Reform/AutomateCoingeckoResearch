@@ -72,11 +72,11 @@ def get_coin_categories(coin_id):
 
 
 # Main function to fetch & compile data
-def fetch_and_save_data():
-    print("\n🚀 Fetching data...")
+# def fetch_and_save_data():
+#     print("\n🚀 Fetching data...")
 
 # Main function to fetch & compile data
-# def main():
+def main():
     # List of coin_ids
     coin_list = [
     'aevo-exchange','altlayer','apecoin','book-of-meme','bouncebit','civic','cookie',
@@ -124,14 +124,14 @@ def fetch_and_save_data():
     print(f"✅ Data saved to {output_file}")
 
 # Schedule the function to run daily at a specific time (e.g., 08:00 AM)
-schedule.every().day.at("08:00").do(fetch_and_save_data)
+# schedule.every().day.at("08:00").do(fetch_and_save_data)
 
-print("⏳ Scheduler is running. Press Ctrl+C to stop.")
+# print("⏳ Scheduler is running. Press Ctrl+C to stop.")
 
 # Keep the script running indefinitely
-while True:
-    schedule.run_pending()
-    time.sleep(60)  # Check for scheduled tasks every 60 seconds
+# while True:
+#     schedule.run_pending()
+#     time.sleep(60)  # Check for scheduled tasks every 60 seconds
 
 if __name__ == "__main__":
     main()
