@@ -54,18 +54,18 @@ jobs:
           git config --global user.name "GitHub Actions"
           git fetch origin
           
-          if git show-ref --verify --quiet refs/remotes/origin/data; then
-            git checkout data
+          if git show-ref --verify --quiet refs/remotes/origin/main; then
+            git checkout main
           else
             git checkout -b data
-            git push origin data
+            git push origin main
           fi
           
           git add . 
           git commit -m "Automated update - $(date)" || echo "No changes to commit"
 
           git stash push --include-untracked
-          git pull --rebase origin data
+          git pull --rebase origin main
           git stash pop || echo "No changes to stash"
 
-          git push origin data
+          git push origin main
