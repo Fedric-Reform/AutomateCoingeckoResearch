@@ -9,6 +9,7 @@ on:
   pull_request:
     branches:
       - data 
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
@@ -18,10 +19,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up Git user
-        run: git config --global user.email "actions@github.com"
-
-      - name: Set up Git user name
-        run: git config --global user.name "GitHub Actions"
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -31,15 +31,12 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade openpyxl pandas requests msal
-
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Verify OpenPyXL Installation
-        run: python -c "import openpyxl; print('Openpyxl version:', openpyxl.__version__)"  # ✅ Debugging step
+        run: python -c "import openpyxl; print('Openpyxl version:', openpyxl.__version__)"
 
-      - name: Run Python script
+      - name: Run Python scripts
         run: |
           python ScheduledBinanceDataCollectionCode.py
           python ScheduledBitgetDataCollectionCode.py
@@ -52,23 +49,10 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
+          git fetch origin data
+          git rev-parse --verify data >/dev/null 2>&1 || git checkout -t origin/data
           git checkout data
           git pull --rebase origin data
           git add .
           git commit -m "Automated update - $(date)" || echo "No changes to commit"
-          git push origin data || (git pull --rebase origin data && git push origin data)
-
-
-      
-      # - name: commit files
-      #   run: |
-      #     git config --local user.email "action@github.com"
-      #     git config --local user.name "GitHub Action"
-      #     git add -A
-      #     git diff-index --quiet HEAD || (git commit -a -m "updated logs" --allow-empty)
-          
-      # - name: push changes
-      #   uses: ad-m/github-push-action@v0.6.0
-      #   with:
-      #     github_token: ${{ secrets.GITHUB_TOKEN }}
-      #     branch: data 
+          git push origin data
