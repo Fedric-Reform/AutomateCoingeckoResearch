@@ -101,4 +101,14 @@ jobs:
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          (git rev-parse --verify data >/dev/null 2>&1 || git checkout -t origin/data) && git push origin data || (git pull --rebase origin data && git push origin data)
+          git fetch origin
+          if git show-ref --verify --quiet refs/remotes/origin/data; then
+            git checkout data
+          else
+            git checkout -b data
+            git push origin data
+          fi
+          git pull --rebase origin data
+          git add .
+          git commit -m "Automated update - $(date)" || echo "No changes to commit"
+          git push origin data
